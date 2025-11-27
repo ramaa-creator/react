@@ -1,0 +1,30 @@
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import Home from '../components/Home'
+import Profile from '../components/Profile'
+
+const Tab = createBottomTabNavigator();
+
+export default function MyTabs() {
+  return (
+    <Tab.Navigator
+      screenOptions = {({route}) => ({
+        headerShown: false,
+        tabBarIcon:({focused, size, color}) => {
+          let iconName;
+
+          if (route.name == "Home") {
+            iconName = focused ? "home" : "home-outline"
+          } else if (route.name == "Profile") {
+            iconName = focused ? "search" : "search-outline"
+          }
+          return <Ionicons name={iconName} size={size} color={color}/>
+        } 
+      })}
+    
+    >
+      <Tab.Screen name='Home' component={Home} />
+      <Tab.Screen name='Profile' component={Profile} />
+    </Tab.Navigator>
+  );
+}
